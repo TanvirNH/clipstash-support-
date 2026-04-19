@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClipStash — Support</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .header .icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+        }
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+        .header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+        .card h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card h2 .emoji {
+            font-size: 22px;
+        }
+        .card p, .card li {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .card ul li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        .card ul li::before {
+            content: "•";
+            position: absolute;
+            left: 4px;
+            color: var(--accent);
+        }
+
+        /* Contact button */
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s;
+            margin-top: 12px;
+        }
+        .contact-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        /* FAQ */
+        details {
+            border-bottom: 1px solid var(--border);
+            padding: 14px 0;
+        }
+        details:last-of-type {
+            border-bottom: none;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        summary::before {
+            content: "+";
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            width: 20px;
+            flex-shrink: 0;
+        }
+        details[open] summary::before {
+            content: "\2212";
+        }
+        details p {
+            margin-top: 10px;
+            padding-left: 30px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+        .footer p {
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        .footer a:hover {
+            color: var(--text);
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="icon">&#x1F4CB;</div>
+            <h1>ClipStash Support</h1>
+            <p>We're here to help. Find answers below or reach out directly.</p>
+        </div>
+
+        <!-- Contact -->
+        <div class="card">
+            <h2><span class="emoji">&#x2709;&#xFE0F;</span> Contact Us</h2>
+            <p>Having trouble or want to share feedback? Reach out and we'll get back to you within 24 hours.</p>
+            <a class="contact-btn" href="mailto:tanvir4talk+appsupport@gmail.com?subject=ClipStash%20%E2%80%94%20Support%20Request&body=Please%20describe%20the%20issue%20you%20are%20experiencing%20below.%0A%0A--------------------------------------------------%0A%0AApp%20Name%3A%20ClipStash%0ACurrent%20Version%3A%20%0ADevice%20Model%3A%20%0AOperating%20System%3A%20%0A%0A--------------------------------------------------%0A%0AIssue%20Description%3A%0A%5BDescribe%20the%20issue%20and%20steps%20to%20reproduce%20it.%5D%0A%0A--------------------------------------------------%0A%0AExpected%20Behavior%3A%0A%5BWhat%20you%20expected%20to%20happen.%5D%0A%0A--------------------------------------------------%0A%0AActual%20Behavior%3A%0A%5BWhat%20actually%20happened.%5D%0A%0A--------------------------------------------------%0A%0AAdditional%20Notes%20(optional)%3A%0A%5BAny%20other%20relevant%20details.%5D%0A%0A--------------------------------------------------">
+                Send Email
+            </a>
+        </div>
+
+        <!-- Getting Started -->
+        <div class="card">
+            <h2><span class="emoji">&#x1F680;</span> Getting Started</h2>
+            <ul>
+                <li>Open ClipStash anytime with <strong>&#x2318; &#x21E7; V</strong></li>
+                <li>Copy anything and it appears in your clipboard history automatically</li>
+                <li>Click any item to paste it, or press <strong>Return</strong> to paste the selected item</li>
+                <li>Pin frequently used clips so they're always at the top</li>
+                <li>Use the search bar to find any clip instantly</li>
+            </ul>
+        </div>
+
+        <!-- FAQ -->
+        <div class="card">
+            <h2><span class="emoji">&#x2753;</span> Frequently Asked Questions</h2>
+
+            <details>
+                <summary>ClipStash isn't capturing my clipboard</summary>
+                <p>Make sure Accessibility permission is granted. Go to <strong>System Settings &rarr; Privacy &amp; Security &rarr; Accessibility</strong> and ensure ClipStash is listed and enabled. If it's already listed, try removing it and adding it again.</p>
+            </details>
+
+            <details>
+                <summary>The keyboard shortcut isn't working</summary>
+                <p>The default shortcut is <strong>&#x2318; &#x21E7; V</strong>. If another app is using this shortcut, there may be a conflict. Check System Settings &rarr; Keyboard &rarr; Keyboard Shortcuts to see if another app has claimed it. Try quitting and reopening ClipStash.</p>
+            </details>
+
+            <details>
+                <summary>How many clips are stored?</summary>
+                <p>Free users can store up to 10 clipboard items. Pro users get unlimited clipboard history. Pinned items are always preserved regardless of the limit.</p>
+            </details>
+
+            <details>
+                <summary>Is my clipboard data private?</summary>
+                <p>Yes. All clipboard data is stored locally on your Mac. ClipStash does not send your clipboard contents to any server. See our <a href="privacy.html" style="color: var(--accent);">Privacy Policy</a> for full details.</p>
+            </details>
+
+            <details>
+                <summary>How do I exclude apps from clipboard tracking?</summary>
+                <p>Open ClipStash Settings and scroll to the <strong>Excluded Apps</strong> section. Add the bundle ID of any app you want to exclude (e.g., <code>com.1password.1password</code>). Password managers are excluded by default.</p>
+            </details>
+
+            <details>
+                <summary>Can I restore my purchase on a new Mac?</summary>
+                <p>Yes. Open ClipStash, go to the Upgrade screen, and click <strong>Restore Purchases</strong>. Your subscription or lifetime purchase will be restored automatically if you're signed in with the same Apple ID.</p>
+            </details>
+
+            <details>
+                <summary>How do I cancel my subscription?</summary>
+                <p>Subscriptions are managed through Apple. Open <strong>System Settings &rarr; Apple ID &rarr; Media &amp; Purchases &rarr; Manage Subscriptions</strong>, find ClipStash, and cancel from there.</p>
+            </details>
+
+            <details>
+                <summary>What's included in the free trial?</summary>
+                <p>The 7-day free trial unlocks all Pro features: unlimited history, AI Smart Tags, custom groups, privacy vault, plain text copy, unlimited pins, and advanced search. No payment required to start.</p>
+            </details>
+        </div>
+
+        <!-- System Requirements -->
+        <div class="card">
+            <h2><span class="emoji">&#x1F4BB;</span> System Requirements</h2>
+            <ul>
+                <li>macOS 14.0 (Sonoma) or later</li>
+                <li>Accessibility permission required for global shortcuts and paste</li>
+                <li>Apple Silicon or Intel Mac</li>
+            </ul>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms of Use</a>
+                <a href="mailto:tanvir4talk+appsupport@gmail.com">Contact</a>
+            </div>
+            <p>&copy; 2025 ClipStash. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
