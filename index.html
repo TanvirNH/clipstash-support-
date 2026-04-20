@@ -6,266 +6,500 @@
     <title>ClipStash — Support</title>
     <style>
         :root {
-            --bg: #0d1117;
-            --surface: #161b22;
-            --border: #30363d;
-            --text: #e6edf3;
-            --text-secondary: #8b949e;
-            --accent: #3b82f6;
-            --accent-hover: #2563eb;
+            --text: #e9e3ff;
+            --text-muted: rgba(230, 225, 255, 0.65);
+            --text-dim: rgba(230, 225, 255, 0.45);
+            --accent: #a78bfa;
+            --accent-soft: #8ab4ff;
+            --accent-hover: #f0abfc;
+            --border: rgba(255, 255, 255, 0.1);
+            --surface: rgba(255, 255, 255, 0.045);
+            --surface-hi: rgba(255, 255, 255, 0.07);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { min-height: 100vh; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: var(--bg);
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', sans-serif;
             color: var(--text);
-            line-height: 1.6;
-            min-height: 100vh;
+            line-height: 1.65;
+            position: relative;
+            background:
+                radial-gradient(ellipse 90% 60% at 80% 0%, #6b4ad6 0%, transparent 55%),
+                radial-gradient(ellipse 110% 80% at 20% 100%, #1a2668 0%, transparent 60%),
+                radial-gradient(ellipse 140% 110% at 50% 40%, #251a66 0%, #0a0830 60%, #040218 100%);
+            background-attachment: fixed;
         }
+        body::before {
+            content: "";
+            position: fixed; inset: 0;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+            opacity: 0.08;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            z-index: 0;
+        }
+        body::after {
+            content: "";
+            position: fixed; inset: 0;
+            background:
+                radial-gradient(circle 600px at 90% 10%, rgba(124, 92, 255, 0.25), transparent 60%),
+                radial-gradient(circle 500px at 10% 85%, rgba(56, 103, 255, 0.18), transparent 60%);
+            filter: blur(60px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
         .container {
-            max-width: 720px;
+            position: relative;
+            z-index: 1;
+            max-width: 820px;
             margin: 0 auto;
-            padding: 60px 24px 80px;
+            padding: 80px 24px 100px;
         }
 
         /* Header */
         .header {
             text-align: center;
-            margin-bottom: 48px;
+            margin-bottom: 56px;
         }
-        .header .icon {
-            width: 72px;
-            height: 72px;
-            border-radius: 18px;
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-            display: flex;
+        .header .app-chip {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 36px;
+            gap: 12px;
+            padding: 8px 16px 8px 10px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            backdrop-filter: blur(20px);
+        }
+        .header .app-chip .logo {
+            width: 30px; height: 30px;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 0 16px rgba(167, 139, 250, 0.5);
+        }
+        .header .app-icon {
+            width: 112px; height: 112px;
+            border-radius: 26px;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 22px;
+            box-shadow:
+                0 24px 48px rgba(124, 92, 255, 0.45),
+                0 0 80px rgba(167, 139, 250, 0.25);
+        }
+        .header .eyebrow {
+            display: inline-block;
+            font-size: 13px; font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c7b9ff;
+            margin-bottom: 14px;
         }
         .header h1 {
-            font-size: 32px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            margin-bottom: 8px;
+            font-size: 48px; font-weight: 800; letter-spacing: -1.5px;
+            margin-bottom: 14px;
+            background: linear-gradient(120deg, #fff 0%, #c7b9ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .header p {
-            color: var(--text-secondary);
-            font-size: 16px;
+            color: var(--text-muted);
+            font-size: 17px;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* Quick actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+        .quick-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 22px 24px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            backdrop-filter: blur(24px);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .quick-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(167, 139, 250, 0.4);
+            background: var(--surface-hi);
+        }
+        .quick-card .qa-icon {
+            width: 48px; height: 48px;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.25), rgba(167, 139, 250, 0.08));
+            border: 1px solid rgba(167, 139, 250, 0.35);
+            color: #d5c4ff;
+        }
+        .quick-card.mail .qa-icon {
+            background: linear-gradient(135deg, rgba(138, 180, 255, 0.25), rgba(138, 180, 255, 0.08));
+            border-color: rgba(138, 180, 255, 0.35);
+            color: #bfd5ff;
+        }
+        .quick-card .qa-title {
+            font-size: 16px; font-weight: 700; color: #fff;
+            margin-bottom: 2px;
+        }
+        .quick-card .qa-sub {
+            font-size: 13px; color: var(--text-dim);
         }
 
         /* Cards */
         .card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 28px;
+            border-radius: 18px;
+            padding: 32px;
             margin-bottom: 20px;
+            backdrop-filter: blur(24px);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: "";
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.4), transparent);
         }
         .card h2 {
+            font-size: 20px; font-weight: 700;
+            margin-bottom: 18px;
+            display: flex; align-items: center; gap: 12px;
+            letter-spacing: -0.3px;
+        }
+        .card h2 .emoji-icon {
+            width: 38px; height: 38px;
+            border-radius: 11px;
+            display: flex; align-items: center; justify-content: center;
             font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.22), rgba(138, 180, 255, 0.08));
+            border: 1px solid rgba(167, 139, 250, 0.3);
         }
-        .card h2 .emoji {
-            font-size: 22px;
+        .card p, .card li { color: var(--text-muted); font-size: 15px; line-height: 1.7; }
+        .card a { color: var(--accent-soft); text-decoration: none; border-bottom: 1px dashed rgba(138, 180, 255, 0.35); }
+        .card a:hover { color: #fff; border-color: #fff; }
+        .card strong { color: #fff; font-weight: 600; }
+
+        /* Getting started numbered steps */
+        .steps {
+            display: flex; flex-direction: column; gap: 12px;
         }
-        .card p, .card li {
-            color: var(--text-secondary);
-            font-size: 14px;
-            line-height: 1.7;
+        .step {
+            display: flex; align-items: flex-start; gap: 16px;
+            padding: 14px 16px;
+            background: rgba(14, 12, 32, 0.4);
+            border: 1px solid var(--border);
+            border-radius: 14px;
         }
-        .card ul {
-            list-style: none;
-            padding: 0;
+        .step .num {
+            width: 30px; height: 30px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 800;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #8ab4ff, #a78bfa);
+            color: #0a0830;
+            box-shadow: 0 4px 12px rgba(167, 139, 250, 0.3);
+            margin-top: 1px;
         }
-        .card ul li {
-            padding: 6px 0;
-            padding-left: 20px;
-            position: relative;
+        .step .st-text {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.55;
         }
-        .card ul li::before {
-            content: "•";
-            position: absolute;
-            left: 4px;
-            color: var(--accent);
-        }
+        .step .st-text strong { color: #fff; font-weight: 600; }
 
         /* Contact button */
         .contact-btn {
             display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--accent);
-            color: #fff;
+            align-items: center; gap: 10px;
+            color: #0a0830;
+            background: linear-gradient(135deg, #8ab4ff 0%, #a78bfa 50%, #f0abfc 100%);
             text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            transition: background 0.2s;
-            margin-top: 12px;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 15px; font-weight: 700;
+            border: none;
+            box-shadow:
+                0 12px 28px rgba(124, 92, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
         .contact-btn:hover {
-            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow:
+                0 16px 36px rgba(124, 92, 255, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
         }
 
         /* FAQ */
+        .faq { display: flex; flex-direction: column; }
         details {
-            border-bottom: 1px solid var(--border);
-            padding: 14px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 4px 0;
+            transition: background 0.2s;
         }
-        details:last-of-type {
-            border-bottom: none;
-        }
+        details:last-of-type { border-bottom: none; }
+        details[open] { background: rgba(167, 139, 250, 0.04); border-radius: 12px; padding: 4px 14px; margin: 0 -14px; }
         summary {
             cursor: pointer;
-            font-weight: 500;
-            font-size: 14px;
+            font-weight: 600; font-size: 15px;
+            color: #fff;
             list-style: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            display: flex; align-items: center; gap: 12px;
+            padding: 14px 0;
         }
+        summary::-webkit-details-marker { display: none; }
         summary::before {
             content: "+";
-            font-size: 18px;
-            font-weight: 300;
-            color: var(--text-secondary);
-            width: 20px;
+            width: 24px; height: 24px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.22), rgba(138, 180, 255, 0.08));
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 16px; font-weight: 400;
+            color: #d5c4ff;
             flex-shrink: 0;
+            transition: transform 0.2s, background 0.2s;
         }
         details[open] summary::before {
             content: "\2212";
+            transform: rotate(180deg);
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.4), rgba(138, 180, 255, 0.2));
         }
         details p {
-            margin-top: 10px;
-            padding-left: 30px;
+            margin: 4px 0 14px 36px;
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* System requirements cards */
+        .req-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .req-item {
+            padding: 16px;
+            background: rgba(14, 12, 32, 0.45);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-align: center;
+        }
+        .req-item .req-ico {
+            font-size: 20px; margin-bottom: 6px;
+            display: block;
+        }
+        .req-item .req-t {
+            font-size: 14px; font-weight: 700; color: #fff;
+            margin-bottom: 2px;
+        }
+        .req-item .req-s {
+            font-size: 12px; color: var(--text-dim);
         }
 
         /* Footer */
         .footer {
             text-align: center;
-            margin-top: 48px;
-            padding-top: 24px;
+            margin-top: 56px;
+            padding-top: 28px;
             border-top: 1px solid var(--border);
         }
-        .footer p {
-            color: var(--text-secondary);
-            font-size: 12px;
-        }
-        .footer a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-        .footer a:hover {
-            color: var(--text);
-        }
+        .footer p { color: var(--text-dim); font-size: 12px; }
+        .footer a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .footer a:hover { color: #fff; }
         .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin-bottom: 12px;
+            display: flex; justify-content: center; flex-wrap: wrap;
+            gap: 8px 24px;
+            margin-bottom: 14px;
+        }
+
+        @media (max-width: 640px) {
+            .container { padding: 48px 18px 72px; }
+            .header h1 { font-size: 34px; }
+            .quick-actions { grid-template-columns: 1fr; }
+            .req-grid { grid-template-columns: 1fr; }
+            .card { padding: 24px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <div class="header">
-            <div class="icon">&#x1F4CB;</div>
-            <h1>ClipStash Support</h1>
-            <p>We're here to help. Find answers below or reach out directly.</p>
+            <div class="app-chip"><img class="logo" src="AppIcon.appiconset/128.png" alt=""> ClipStash for macOS</div>
+            <img class="app-icon" src="AppIcon.appiconset/512.png" alt="ClipStash">
+            <div class="eyebrow">Support Center</div>
+            <h1>We're here to help.</h1>
+            <p>Find answers below — or reach out directly and we'll get back within 24 hours.</p>
         </div>
 
-        <!-- Contact -->
-        <div class="card">
-            <h2><span class="emoji">&#x2709;&#xFE0F;</span> Contact Us</h2>
-            <p>Having trouble or want to share feedback? Reach out and we'll get back to you within 24 hours.</p>
-            <a class="contact-btn" href="mailto:tanvir4talk+appsupport@gmail.com?subject=ClipStash%20%E2%80%94%20Support%20Request&body=Please%20describe%20the%20issue%20you%20are%20experiencing%20below.%0A%0A--------------------------------------------------%0A%0AApp%20Name%3A%20ClipStash%0ACurrent%20Version%3A%20%0ADevice%20Model%3A%20%0AOperating%20System%3A%20%0A%0A--------------------------------------------------%0A%0AIssue%20Description%3A%0A%5BDescribe%20the%20issue%20and%20steps%20to%20reproduce%20it.%5D%0A%0A--------------------------------------------------%0A%0AExpected%20Behavior%3A%0A%5BWhat%20you%20expected%20to%20happen.%5D%0A%0A--------------------------------------------------%0A%0AActual%20Behavior%3A%0A%5BWhat%20actually%20happened.%5D%0A%0A--------------------------------------------------%0A%0AAdditional%20Notes%20(optional)%3A%0A%5BAny%20other%20relevant%20details.%5D%0A%0A--------------------------------------------------">
-                Send Email
+        <!-- Quick actions -->
+        <div class="quick-actions">
+            <a class="quick-card mail" href="mailto:tanvir4talk+appsupport@gmail.com?subject=ClipStash%20%E2%80%94%20Support%20Request&body=Please%20describe%20the%20issue%20you%20are%20experiencing%20below.%0A%0A--------------------------------------------------%0A%0AApp%20Name%3A%20ClipStash%0ACurrent%20Version%3A%20%0ADevice%20Model%3A%20%0AOperating%20System%3A%20%0A%0A--------------------------------------------------%0A%0AIssue%20Description%3A%0A%5BDescribe%20the%20issue%20and%20steps%20to%20reproduce%20it.%5D%0A%0A--------------------------------------------------%0A%0AExpected%20Behavior%3A%0A%5BWhat%20you%20expected%20to%20happen.%5D%0A%0A--------------------------------------------------%0A%0AActual%20Behavior%3A%0A%5BWhat%20actually%20happened.%5D%0A%0A--------------------------------------------------%0A%0AAdditional%20Notes%20(optional)%3A%0A%5BAny%20other%20relevant%20details.%5D%0A%0A--------------------------------------------------">
+                <div class="qa-icon">&#x2709;&#xFE0F;</div>
+                <div>
+                    <div class="qa-title">Email support</div>
+                    <div class="qa-sub">Replies within 24 hours</div>
+                </div>
+            </a>
+            <a class="quick-card" href="https://tanvirnh.github.io/clipstash-privacy-policy/">
+                <div class="qa-icon">&#x1F512;</div>
+                <div>
+                    <div class="qa-title">Privacy policy</div>
+                    <div class="qa-sub">How your data stays local</div>
+                </div>
             </a>
         </div>
 
         <!-- Getting Started -->
         <div class="card">
-            <h2><span class="emoji">&#x1F680;</span> Getting Started</h2>
-            <ul>
-                <li>Open ClipStash anytime with <strong>&#x2318; &#x21E7; V</strong></li>
-                <li>Copy anything and it appears in your clipboard history automatically</li>
-                <li>Click any item to paste it, or press <strong>Return</strong> to paste the selected item</li>
-                <li>Pin frequently used clips so they're always at the top</li>
-                <li>Use the search bar to find any clip instantly</li>
-            </ul>
+            <h2><span class="emoji-icon">&#x1F680;</span> Getting started</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="num">1</div>
+                    <div class="st-text">Click the <strong>ClipStash icon</strong> in your menu bar to open the panel.</div>
+                </div>
+                <div class="step">
+                    <div class="num">2</div>
+                    <div class="st-text">Copy anything — text, URLs, files from Finder, or screenshots (Pro) — and it appears in your history automatically.</div>
+                </div>
+                <div class="step">
+                    <div class="num">3</div>
+                    <div class="st-text">Click an item to paste it, or press <strong>Return</strong> on the selected item.</div>
+                </div>
+                <div class="step">
+                    <div class="num">4</div>
+                    <div class="st-text">Pin frequently used clips (<strong>⌘P</strong>) so they're always at the top.</div>
+                </div>
+                <div class="step">
+                    <div class="num">5</div>
+                    <div class="st-text">Drag clips into a custom group (Pro) to keep work, research, and snippets separate.</div>
+                </div>
+                <div class="step">
+                    <div class="num">6</div>
+                    <div class="st-text">Pro users can bind a custom global shortcut in <strong>Settings &rarr; Shortcuts</strong>.</div>
+                </div>
+            </div>
         </div>
 
         <!-- FAQ -->
         <div class="card">
-            <h2><span class="emoji">&#x2753;</span> Frequently Asked Questions</h2>
+            <h2><span class="emoji-icon">&#x2753;</span> Frequently asked</h2>
+            <div class="faq">
+                <details>
+                    <summary>ClipStash isn't capturing my clipboard</summary>
+                    <p>Make sure Accessibility permission is granted — it's required for pasting clips back into the active app. Go to <strong>System Settings &rarr; Privacy &amp; Security &rarr; Accessibility</strong> and ensure ClipStash is enabled. If it's already listed, try removing it and adding it again.</p>
+                </details>
 
-            <details>
-                <summary>ClipStash isn't capturing my clipboard</summary>
-                <p>Make sure Accessibility permission is granted. Go to <strong>System Settings &rarr; Privacy &amp; Security &rarr; Accessibility</strong> and ensure ClipStash is listed and enabled. If it's already listed, try removing it and adding it again.</p>
-            </details>
+                <details>
+                    <summary>There's no keyboard shortcut by default — is that right?</summary>
+                    <p>Yes. ClipStash lives in your menu bar, and a default shortcut would often collide with another app's hotkey. Pro users can open <strong>Settings &rarr; Shortcuts</strong> and record any combination they like — ClipStash flags conflicts instantly so you land on something that works.</p>
+                </details>
 
-            <details>
-                <summary>The keyboard shortcut isn't working</summary>
-                <p>The default shortcut is <strong>&#x2318; &#x21E7; V</strong>. If another app is using this shortcut, there may be a conflict. Check System Settings &rarr; Keyboard &rarr; Keyboard Shortcuts to see if another app has claimed it. Try quitting and reopening ClipStash.</p>
-            </details>
+                <details>
+                    <summary>How many clips are stored?</summary>
+                    <p>Free users can store up to 10 clipboard items. Pro users get unlimited clipboard history. Pinned items are always preserved regardless of the limit.</p>
+                </details>
 
-            <details>
-                <summary>How many clips are stored?</summary>
-                <p>Free users can store up to 10 clipboard items. Pro users get unlimited clipboard history. Pinned items are always preserved regardless of the limit.</p>
-            </details>
+                <details>
+                    <summary>Can ClipStash save files and images, not just text?</summary>
+                    <p>Yes. Files copied from Finder are recognized as file clips and paste back as the original file — drag them into another Finder window, attach them in Mail, etc. Screenshots and copied images are saved as image clips for Pro users.</p>
+                </details>
 
-            <details>
-                <summary>Is my clipboard data private?</summary>
-                <p>Yes. All clipboard data is stored locally on your Mac. ClipStash does not send your clipboard contents to any server. See our <a href="https://tanvirnh.github.io/clipstash-privacy-policy/" style="color: var(--accent);">Privacy Policy</a> for full details.</p>
-            </details>
+                <details>
+                    <summary>How do I organize clips into groups?</summary>
+                    <p>With Pro, create a custom group by right-clicking any clip and choosing <strong>Move to Group &rarr; New Group…</strong>, or drag any clip onto a group tab in the panel. Drag a clip onto the <strong>All</strong> tab to remove it from its group.</p>
+                </details>
 
-            <details>
-                <summary>How do I exclude apps from clipboard tracking?</summary>
-                <p>Open ClipStash Settings and scroll to the <strong>Excluded Apps</strong> section. Add the bundle ID of any app you want to exclude (e.g., <code>com.1password.1password</code>). Password managers are excluded by default.</p>
-            </details>
+                <details>
+                    <summary>Is my clipboard data private?</summary>
+                    <p>Yes. All clipboard data — text, files, and images — is stored locally on your Mac. ClipStash does not send your clipboard contents to any server. See our <a href="https://tanvirnh.github.io/clipstash-privacy-policy/">Privacy Policy</a> for full details.</p>
+                </details>
 
-            <details>
-                <summary>Can I restore my purchase on a new Mac?</summary>
-                <p>Yes. Open ClipStash, go to the Upgrade screen, and click <strong>Restore Purchases</strong>. Your subscription or lifetime purchase will be restored automatically if you're signed in with the same Apple ID.</p>
-            </details>
+                <details>
+                    <summary>How do I exclude apps from clipboard tracking?</summary>
+                    <p>Open ClipStash Settings and scroll to the <strong>Excluded Apps</strong> section, then click <strong>Choose Apps…</strong> and pick one or more apps from your Applications folder. Clips copied while those apps are in the foreground will be skipped.</p>
+                </details>
 
-            <details>
-                <summary>How do I cancel my subscription?</summary>
-                <p>Subscriptions are managed through Apple. Open <strong>System Settings &rarr; Apple ID &rarr; Media &amp; Purchases &rarr; Manage Subscriptions</strong>, find ClipStash, and cancel from there.</p>
-            </details>
+                <details>
+                    <summary>Can I restore my purchase on a new Mac?</summary>
+                    <p>Yes. Open ClipStash, go to the Upgrade screen, and click <strong>Restore Purchases</strong>. Your subscription or lifetime purchase will be restored automatically if you're signed in with the same Apple ID.</p>
+                </details>
 
-            <details>
-                <summary>What's included in the free trial?</summary>
-                <p>The 7-day free trial unlocks all Pro features: unlimited history, AI Smart Tags, custom groups, privacy vault, plain text copy, unlimited pins, and advanced search. No payment required to start.</p>
-            </details>
+                <details>
+                    <summary>How do I cancel my subscription?</summary>
+                    <p>Subscriptions are managed through Apple. Open <strong>System Settings &rarr; Apple ID &rarr; Media &amp; Purchases &rarr; Manage Subscriptions</strong>, find ClipStash, and cancel from there.</p>
+                </details>
+
+                <details>
+                    <summary>What's included in the free trial?</summary>
+                    <p>The 7-day free trial unlocks every Pro feature: unlimited history, image clips, Smart Tags, Custom Groups with drag-to-organize, Privacy Vault with Touch ID, plain text copy, unlimited pins, source-app tracking, and a customizable global shortcut. After the trial, your subscription converts to $2.99/month unless canceled at least 24 hours before the trial ends.</p>
+                </details>
+
+                <details>
+                    <summary>I already used my free trial — why can't I start another?</summary>
+                    <p>Free-trial eligibility is managed by Apple and tied to your Apple ID, not your ClipStash install. Reinstalling or switching Macs does not reset eligibility. You can still subscribe to any plan or purchase the lifetime option.</p>
+                </details>
+            </div>
         </div>
 
         <!-- System Requirements -->
         <div class="card">
-            <h2><span class="emoji">&#x1F4BB;</span> System Requirements</h2>
-            <ul>
-                <li>macOS 14.0 (Sonoma) or later</li>
-                <li>Accessibility permission required for global shortcuts and paste</li>
-                <li>Apple Silicon or Intel Mac</li>
-            </ul>
+            <h2><span class="emoji-icon">&#x1F4BB;</span> System requirements</h2>
+            <div class="req-grid">
+                <div class="req-item">
+                    <span class="req-ico">&#x1F34E;</span>
+                    <div class="req-t">macOS 14.0+</div>
+                    <div class="req-s">Sonoma or later</div>
+                </div>
+                <div class="req-item">
+                    <span class="req-ico">&#x1F510;</span>
+                    <div class="req-t">Accessibility</div>
+                    <div class="req-s">For pasting clips</div>
+                </div>
+                <div class="req-item">
+                    <span class="req-ico">&#x1F4BB;</span>
+                    <div class="req-t">Apple Silicon</div>
+                    <div class="req-s">or Intel Mac</div>
+                </div>
+            </div>
         </div>
 
-        <!-- Footer -->
+        <!-- Still need help -->
+        <div class="card" style="text-align: center;">
+            <h2 style="justify-content: center;"><span class="emoji-icon">&#x1F4AC;</span> Still need help?</h2>
+            <p style="margin-bottom: 18px;">We reply to every message personally, usually within 24 hours.</p>
+            <a class="contact-btn" href="mailto:tanvir4talk+appsupport@gmail.com?subject=ClipStash%20%E2%80%94%20Support%20Request">
+                Send us an email &rarr;
+            </a>
+        </div>
+
         <div class="footer">
             <div class="footer-links">
                 <a href="https://tanvirnh.github.io/clipstash-privacy-policy/">Privacy Policy</a>
                 <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms of Use</a>
                 <a href="mailto:tanvir4talk+appsupport@gmail.com">Contact</a>
             </div>
-            <p>&copy; 2025 ClipStash. All rights reserved.</p>
+            <p>&copy; 2026 ClipStash. All rights reserved.</p>
         </div>
     </div>
 </body>
