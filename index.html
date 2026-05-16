@@ -230,24 +230,67 @@
         /* Contact button */
         .contact-btn {
             display: inline-flex;
-            align-items: center; gap: 10px;
+            align-items: center;
+            gap: 12px;
             color: #0a0830;
             background: linear-gradient(135deg, #8ab4ff 0%, #a78bfa 50%, #f0abfc 100%);
             text-decoration: none;
-            padding: 14px 24px;
-            border-radius: 12px;
-            font-size: 15px; font-weight: 700;
+            padding: 16px 32px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: -0.2px;
             border: none;
             box-shadow:
-                0 12px 28px rgba(124, 92, 255, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.4);
-            transition: transform 0.2s, box-shadow 0.2s;
+                0 16px 40px rgba(124, 92, 255, 0.45),
+                0 4px 12px rgba(167, 139, 250, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            transition: transform 0.22s cubic-bezier(.34,1.56,.64,1), box-shadow 0.22s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .contact-btn .btn-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(10, 8, 48, 0.18);
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+            backdrop-filter: blur(4px);
+        }
+        .contact-btn .btn-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.2;
+        }
+        .contact-btn .btn-label {
+            font-size: 16px;
+            font-weight: 800;
+            color: #0a0830;
+        }
+        .contact-btn .btn-sub {
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(10, 8, 48, 0.65);
+            letter-spacing: 0.2px;
         }
         .contact-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.02);
             box-shadow:
-                0 16px 36px rgba(124, 92, 255, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+                0 22px 48px rgba(124, 92, 255, 0.55),
+                0 6px 16px rgba(167, 139, 250, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
         }
 
         /* FAQ */
@@ -355,11 +398,11 @@
         <!-- Quick actions -->
         <div class="quick-actions">
             <a class="quick-card mail" href="mailto:tanvir4talk+appsupport@gmail.com?subject=ClipStash%20%E2%80%94%20Support%20Request&body=Please%20describe%20the%20issue%20you%20are%20experiencing%20below.%0A%0A--------------------------------------------------%0A%0AApp%20Name%3A%20ClipStash%0ACurrent%20Version%3A%20%0ADevice%20Model%3A%20%0AOperating%20System%3A%20%0A%0A--------------------------------------------------%0A%0AIssue%20Description%3A%0A%5BDescribe%20the%20issue%20and%20steps%20to%20reproduce%20it.%5D%0A%0A--------------------------------------------------%0A%0AExpected%20Behavior%3A%0A%5BWhat%20you%20expected%20to%20happen.%5D%0A%0A--------------------------------------------------%0A%0AActual%20Behavior%3A%0A%5BWhat%20actually%20happened.%5D%0A%0A--------------------------------------------------%0A%0AAdditional%20Notes%20(optional)%3A%0A%5BAny%20other%20relevant%20details.%5D%0A%0A--------------------------------------------------">
-                <div class="qa-icon">&#x2709;&#xFE0F;</div>
-                <div>
-                    <div class="qa-title">Email support</div>
-                    <div class="qa-sub">Replies within 24 hours</div>
-                </div>
+              <div class="qa-icon">&#x2709;&#xFE0F;</div>
+              <div>
+                <div class="qa-title">Contact Support</div>
+                <div class="qa-sub">Replies within 24 hours</div>
+              </div>
             </a>
             <a class="quick-card" href="https://tanvirnh.github.io/clipstash-privacy-policy/">
                 <div class="qa-icon">&#x1F512;</div>
@@ -485,11 +528,15 @@
         </div>
 
         <!-- Still need help -->
-        <div class="card" style="text-align: center;">
-            <h2 style="justify-content: center;"><span class="emoji-icon">&#x1F4AC;</span> Still need help?</h2>
-            <p style="margin-bottom: 18px;">We reply to every message personally, usually within 24 hours.</p>
-            <a class="contact-btn" href="mailto:tanvir4talk+appsupport@gmail.com?subject=ClipStash%20%E2%80%94%20Support%20Request">
-                Send us an email &rarr;
+        <div class="card" style="text-align: center; padding: 48px 32px;">
+            <h2 style="justify-content: center; margin-bottom: 10px;"><span class="emoji-icon">&#x1F4AC;</span> Still need help?</h2>
+            <p style="margin-bottom: 8px; font-size: 16px;">We reply to every message personally, usually within 24 hours.</p>
+            <p style="margin-bottom: 28px; font-size: 13px; color: var(--text-dim);">Include your macOS version and a brief description to get the fastest reply.</p>
+            <a class="contact-btn" href="mailto:tanvir4talk+appsupport@gmail.com?subject=ClipStash%20%E2%80%94%20Support%20Request&body=Please%20describe%20the%20issue%20you%20are%20experiencing%20below.%0A%0A--------------------------------------------------%0A%0AApp%20Name%3A%20ClipStash%0ACurrent%20Version%3A%20%0ADevice%20Model%3A%20%0AOperating%20System%3A%20%0A%0A--------------------------------------------------%0A%0AIssue%20Description%3A%0A%5BDescribe%20the%20issue%20and%20steps%20to%20reproduce%20it.%5D%0A%0A--------------------------------------------------%0A%0AExpected%20Behavior%3A%0A%5BWhat%20you%20expected%20to%20happen.%5D%0A%0A--------------------------------------------------%0A%0AActual%20Behavior%3A%0A%5BWhat%20actually%20happened.%5D%0A%0A--------------------------------------------------%0A%0AAdditional%20Notes%20(optional)%3A%0A%5BAny%20other%20relevant%20details.%5D%0A%0A--------------------------------------------------">
+                <div class="btn-icon">&#x2709;&#xFE0F;</div>
+                <div class="btn-text">
+                    <span class="btn-label">Contact Support</span>
+                </div>
             </a>
         </div>
 
@@ -497,9 +544,8 @@
             <div class="footer-links">
                 <a href="https://tanvirnh.github.io/clipstash-privacy-policy/">Privacy Policy</a>
                 <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms of Use</a>
-                <a href="mailto:tanvir4talk+appsupport@gmail.com">Contact</a>
             </div>
-            <p>&copy; 2026 ClipStash. All rights reserved.</p>
+            <p>&copy; 2026 Tanvir N Hasan &middot; ClipStash</p>
         </div>
     </div>
 </body>
